@@ -1,0 +1,217 @@
+1. Question: Define two methods to print the maximum and the minimum number respectively among three numbers entered by the user.
+
+import java.util.Scanner;
+
+public class MaxMin {
+
+    static void findMax(int a, int b, int c) {
+        int max = a;
+
+        if (b > max)
+            max = b;
+        if (c > max)
+            max = c;
+
+        System.out.println("Maximum = " + max);
+    }
+
+    static void findMin(int a, int b, int c) {
+        int min = a;
+
+        if (b < min)
+            min = b;
+        if (c < min)
+            min = c;
+
+        System.out.println("Minimum = " + min);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter three numbers: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int c = sc.nextInt();
+
+        findMax(a, b, c);
+        findMin(a, b, c);
+
+        sc.close();
+    }
+}
+
+
+
+2. Question: Define a program to find out whether a given number is even or odd.
+
+import java.util.Scanner;
+
+public class EvenOddMethod {
+
+    static void checkEvenOdd(int num) {
+        if (num % 2 == 0)
+            System.out.println("Even Number");
+        else
+            System.out.println("Odd Number");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+
+        checkEvenOdd(num);
+
+        sc.close();
+    }
+}
+
+
+
+3. Question: A person is eligible to vote if his/her age is greater than or equal to 18. Define a method to find out if he/she is eligible to vote.
+
+import java.util.Scanner;
+
+public class VotingEligibility {
+
+    static void checkVote(int age) {
+        if (age >= 18)
+            System.out.println("Eligible to Vote");
+        else
+            System.out.println("Not Eligible to Vote");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter age: ");
+        int age = sc.nextInt();
+
+        checkVote(age);
+
+        sc.close();
+    }
+}
+
+
+
+4. Question: Write a program to print the sum of two numbers entered by user by defining your own method.
+
+import java.util.Scanner;
+
+public class SumMethod {
+
+    static void sum(int a, int b) {
+        System.out.println("Sum = " + (a + b));
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = sc.nextInt();
+
+        sum(a, b);
+
+        sc.close();
+    }
+}
+
+
+
+5. Question: Define a method that returns the product of two numbers entered by user.
+
+import java.util.Scanner;
+
+public class ProductMethod {
+
+    static int product(int a, int b) {
+        return a * b;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = sc.nextInt();
+
+        int result = product(a, b);
+
+        System.out.println("Product = " + result);
+
+        sc.close();
+    }
+}
+
+
+
+6. Question: Write a program to print the circumference and area of a circle of radius entered by user by defining your own method.
+
+import java.util.Scanner;
+
+public class CircleMethods {
+
+    static double area(double r) {
+        return Math.PI * r * r;
+    }
+
+    static double circumference(double r) {
+        return 2 * Math.PI * r;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter radius: ");
+        double radius = sc.nextDouble();
+
+        System.out.println("Area = " + area(radius));
+        System.out.println("Circumference = " + circumference(radius));
+
+        sc.close();
+    }
+}
+
+
+
+7. Question: Define a method to find out if a number is prime or not.
+
+import java.util.Scanner;
+
+public class PrimeMethod {
+
+    static boolean isPrime(int num) {
+
+        if (num <= 1)
+            return false;
+
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+
+        if (isPrime(num))
+            System.out.println(num + " is a Prime Number.");
+        else
+            System.out.println(num + " is Not a Prime Number.");
+
+        sc.close();
+    }
+}

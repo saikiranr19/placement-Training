@@ -1,0 +1,490 @@
+Basic Java Programs
+
+1. Question: Area of Circle Java Program
+
+
+import java.util.Scanner;
+
+public class AreaOfCircle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter radius: ");
+        double radius = sc.nextDouble();
+
+        double area = Math.PI * radius * radius;
+
+        System.out.println("Area of Circle = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+2. Question: Area of Triangle
+
+import java.util.Scanner;
+
+public class AreaOfTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter height: ");
+        double height = sc.nextDouble();
+
+        double area = 0.5 * base * height;
+
+        System.out.println("Area of Triangle = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+3. Question: Area of Rectangle Program
+
+import java.util.Scanner;
+
+public class AreaOfRectangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter length: ");
+        double length = sc.nextDouble();
+
+        System.out.print("Enter width: ");
+        double width = sc.nextDouble();
+
+        double area = length * width;
+
+        System.out.println("Area of Rectangle = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+4. Question: Area of Isosceles Triangle
+
+import java.util.Scanner;
+
+public class AreaOfIsoscelesTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter height: ");
+        double height = sc.nextDouble();
+
+        double area = (base * height) / 2;
+
+        System.out.println("Area of Isosceles Triangle = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+5. Question: Area of Parallelogram
+
+import java.util.Scanner;
+
+public class AreaOfParallelogram {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter height: ");
+        double height = sc.nextDouble();
+
+        double area = base * height;
+
+        System.out.println("Area of Parallelogram = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+6. Question: Area of Rhombus
+
+import java.util.Scanner;
+
+public class AreaOfRhombus {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter first diagonal: ");
+        double d1 = sc.nextDouble();
+
+        System.out.print("Enter second diagonal: ");
+        double d2 = sc.nextDouble();
+
+        double area = (d1 * d2) / 2;
+
+        System.out.println("Area of Rhombus = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+7. Question: Area of Equilateral Triangle
+
+import java.util.Scanner;
+
+public class AreaOfEquilateralTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter side: ");
+        double side = sc.nextDouble();
+
+        double area = (Math.sqrt(3) / 4) * side * side;
+
+        System.out.println("Area of Equilateral Triangle = " + area);
+
+        sc.close();
+    }
+}
+
+
+
+8. Question: Perimeter of Circle
+
+import java.util.Scanner;
+
+public class PerimeterOfCircle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter radius: ");
+        double radius = sc.nextDouble();
+
+        double perimeter = 2 * Math.PI * radius;
+
+        System.out.println("Perimeter (Circumference) = " + perimeter);
+
+        sc.close();
+    }
+}
+
+
+
+9. Question: Perimeter of Equilateral Triangle
+
+import java.util.Scanner;
+
+public class PerimeterOfEquilateralTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter side: ");
+        double side = sc.nextDouble();
+
+        double perimeter = 3 * side;
+
+        System.out.println("Perimeter of Equilateral Triangle = " + perimeter);
+
+        sc.close();
+    }
+}
+
+
+
+10. Question: Perimeter of Parallelogram
+
+import java.util.Scanner;
+
+public class PerimeterOfParallelogram {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter side: ");
+        double side = sc.nextDouble();
+
+        double perimeter = 2 * (base + side);
+
+        System.out.println("Perimeter of Parallelogram = " + perimeter);
+
+        sc.close();
+    }
+}
+
+
+
+
+Intermediate Java Programs
+
+
+
+1. Question: Factorial Program in Java
+
+import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt();
+
+        long factorial = 1;
+
+        for (int i = 1; i <= num; i++) {
+            factorial *= i;
+        }
+
+        System.out.println("Factorial = " + factorial);
+
+        sc.close();
+    }
+}
+
+
+
+2. Question: Calculate Electricity Bill
+
+import java.util.Scanner;
+
+public class ElectricityBill {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter units consumed: ");
+        double units = sc.nextDouble();
+
+        double bill = units * 7.5; // Example rate per unit
+
+        System.out.println("Electricity Bill = ₹" + bill);
+
+        sc.close();
+    }
+}
+
+
+
+3. Question: Calculate Average of N Numbers
+
+import java.util.Scanner;
+
+public class AverageOfNumbers {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("How many numbers? ");
+        int n = sc.nextInt();
+
+        double sum = 0;
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Enter number " + i + ": ");
+            sum += sc.nextDouble();
+        }
+
+        double average = sum / n;
+
+        System.out.println("Average = " + average);
+
+        sc.close();
+    }
+}
+
+
+
+4. Question: Calculate Discount of Product
+
+import java.util.Scanner;
+
+public class DiscountCalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter product price: ");
+        double price = sc.nextDouble();
+
+        System.out.print("Enter discount percentage: ");
+        double discount = sc.nextDouble();
+
+        double discountAmount = (price * discount) / 100;
+        double finalPrice = price - discountAmount;
+
+        System.out.println("Discount Amount = ₹" + discountAmount);
+        System.out.println("Final Price = ₹" + finalPrice);
+
+        sc.close();
+    }
+}
+
+
+
+5. Question: Calculate Distance Between Two Points
+
+import java.util.Scanner;
+
+public class DistanceBetweenPoints {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter x1: ");
+        double x1 = sc.nextDouble();
+
+        System.out.print("Enter y1: ");
+        double y1 = sc.nextDouble();
+
+        System.out.print("Enter x2: ");
+        double x2 = sc.nextDouble();
+
+        System.out.print("Enter y2: ");
+        double y2 = sc.nextDouble();
+
+        double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+
+        System.out.println("Distance = " + distance);
+
+        sc.close();
+    }
+}
+
+
+
+6. Question: Calculate Commission Percentage
+
+import java.util.Scanner;
+
+public class CommissionPercentage {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter total sales amount: ");
+        double sales = sc.nextDouble();
+
+        System.out.print("Enter commission earned: ");
+        double commission = sc.nextDouble();
+
+        double percentage = (commission / sales) * 100;
+
+        System.out.println("Commission Percentage = " + percentage + "%");
+
+        sc.close();
+    }
+}
+
+
+
+7. Question: Power in Java
+
+import java.util.Scanner;
+
+public class PowerProgram {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter base: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter exponent: ");
+        double exponent = sc.nextDouble();
+
+        double result = Math.pow(base, exponent);
+
+        System.out.println("Result = " + result);
+
+        sc.close();
+    }
+}
+
+
+
+8. Question: Calculate Depreciation of Value
+
+import java.util.Scanner;
+
+public class Depreciation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter initial value: ");
+        double value = sc.nextDouble();
+
+        System.out.print("Enter depreciation rate (%): ");
+        double rate = sc.nextDouble();
+
+        System.out.print("Enter number of years: ");
+        int years = sc.nextInt();
+
+        double finalValue = value * Math.pow((1 - rate / 100), years);
+
+        System.out.println("Value after depreciation = ₹" + finalValue);
+
+        sc.close();
+    }
+}
+
+
+
+9. Question: Calculate Batting Average
+
+import java.util.Scanner;
+
+public class BattingAverage {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter total runs scored: ");
+        double runs = sc.nextDouble();
+
+        System.out.print("Enter number of times out: ");
+        double outs = sc.nextDouble();
+
+        double average = runs / outs;
+
+        System.out.println("Batting Average = " + average);
+
+        sc.close();
+    }
+}
+
+
+
+10. Question: Calculate CGPA Java Program
+
+import java.util.Scanner;
+
+public class CGPACalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of subjects: ");
+        int n = sc.nextInt();
+
+        double total = 0;
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Enter GPA of subject " + i + ": ");
+            total += sc.nextDouble();
+        }
+
+        double cgpa = total / n;
+
+        System.out.println("CGPA = " + cgpa);
+
+        sc.close();
+    }
+}

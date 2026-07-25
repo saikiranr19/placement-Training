@@ -1,0 +1,1684 @@
+1. Binary Tree Inorder Traversal — LeetCode (Java)
+
+
+import java.util.*;
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        TreeNode curr = root;
+
+        while(curr != null || !stack.isEmpty()) {
+
+            while(curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+
+            curr = stack.pop();
+            result.add(curr.val);
+
+            curr = curr.right;
+        }
+
+        return result;
+    }
+}
+
+
+
+2. Same Tree — LeetCode (Java)
+
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+
+        if(p == null && q == null)
+            return true;
+
+        if(p == null || q == null)
+            return false;
+
+        return p.val == q.val &&
+               isSameTree(p.left, q.left) &&
+               isSameTree(p.right, q.right);
+    }
+}
+
+
+3. Symmetric Tree — LeetCode (Java)
+
+class Solution {
+
+    public boolean isSymmetric(TreeNode root) {
+
+        if(root == null)
+            return true;
+
+        return check(root.left, root.right);
+    }
+
+
+    private boolean check(TreeNode left, TreeNode right) {
+
+        if(left == null && right == null)
+            return true;
+
+        if(left == null || right == null)
+            return false;
+
+        return left.val == right.val &&
+               check(left.left, right.right) &&
+               check(left.right, right.left);
+    }
+}
+
+
+
+4. Maximum Depth of Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    public int maxDepth(TreeNode root) {
+
+        if(root == null)
+            return 0;
+
+        return 1 + Math.max(
+            maxDepth(root.left),
+            maxDepth(root.right)
+        );
+    }
+}
+
+
+
+5. Convert Sorted Array to Binary Search Tree — LeetCode (Java)
+
+class Solution {
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+
+        return build(nums, 0, nums.length - 1);
+    }
+
+
+    private TreeNode build(int[] nums, int left, int right) {
+
+        if(left > right)
+            return null;
+
+        int mid = left + (right - left) / 2;
+
+        TreeNode node = new TreeNode(nums[mid]);
+
+        node.left = build(nums, left, mid - 1);
+        node.right = build(nums, mid + 1, right);
+
+        return node;
+    }
+}
+
+
+
+6. Balanced Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    public boolean isBalanced(TreeNode root) {
+
+        return height(root) != -1;
+    }
+
+
+    private int height(TreeNode node) {
+
+        if(node == null)
+            return 0;
+
+
+        int left = height(node.left);
+
+        if(left == -1)
+            return -1;
+
+
+        int right = height(node.right);
+
+        if(right == -1)
+            return -1;
+
+
+        if(Math.abs(left - right) > 1)
+            return -1;
+
+
+        return Math.max(left, right) + 1;
+    }
+}
+
+
+
+7. Minimum Depth of Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    public int minDepth(TreeNode root) {
+
+        if(root == null)
+            return 0;
+
+
+        if(root.left == null)
+            return 1 + minDepth(root.right);
+
+
+        if(root.right == null)
+            return 1 + minDepth(root.left);
+
+
+        return 1 + Math.min(
+            minDepth(root.left),
+            minDepth(root.right)
+        );
+    }
+}
+
+
+
+8. Path Sum — LeetCode (Java)
+
+class Solution {
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+
+        if(root == null)
+            return false;
+
+
+        if(root.left == null && root.right == null)
+            return targetSum == root.val;
+
+
+        return hasPathSum(root.left, targetSum - root.val) ||
+               hasPathSum(root.right, targetSum - root.val);
+    }
+}
+
+
+
+9. Binary Tree Preorder Traversal — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    public List<Integer> preorderTraversal(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+
+        if(root == null)
+            return result;
+
+
+        Stack<TreeNode> stack = new Stack<>();
+
+        stack.push(root);
+
+
+        while(!stack.isEmpty()) {
+
+            TreeNode node = stack.pop();
+
+            result.add(node.val);
+
+
+            if(node.right != null)
+                stack.push(node.right);
+
+
+            if(node.left != null)
+                stack.push(node.left);
+        }
+
+
+        return result;
+    }
+}
+
+
+
+10. Binary Tree Postorder Traversal — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+
+        if(root == null)
+            return result;
+
+
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+
+        stack1.push(root);
+
+
+        while(!stack1.isEmpty()) {
+
+            TreeNode node = stack1.pop();
+
+            stack2.push(node);
+
+
+            if(node.left != null)
+                stack1.push(node.left);
+
+
+            if(node.right != null)
+                stack1.push(node.right);
+        }
+
+
+        while(!stack2.isEmpty()) {
+
+            result.add(stack2.pop().val);
+        }
+
+
+        return result;
+    }
+}
+
+
+11. Invert Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    public TreeNode invertTree(TreeNode root) {
+
+        if(root == null)
+            return null;
+
+
+        TreeNode temp = root.left;
+
+        root.left = invertTree(root.right);
+        root.right = invertTree(temp);
+
+
+        return root;
+    }
+}
+
+
+
+1. Validate Binary Search Tree — LeetCode (Java)
+
+class Solution {
+
+    public boolean isValidBST(TreeNode root) {
+
+        return check(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+
+    private boolean check(TreeNode node, long min, long max) {
+
+        if(node == null)
+            return true;
+
+
+        if(node.val <= min || node.val >= max)
+            return false;
+
+
+        return check(node.left, min, node.val) &&
+               check(node.right, node.val, max);
+    }
+}
+
+
+
+2. All Nodes Distance K in Binary Tree — LeetCode (Java)
+
+
+import java.util.*;
+
+class Solution {
+
+    Map<TreeNode, TreeNode> parent = new HashMap<>();
+
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+
+        buildParent(root, null);
+
+        List<Integer> result = new ArrayList<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        Set<TreeNode> visited = new HashSet<>();
+
+        queue.offer(target);
+        visited.add(target);
+
+        int level = 0;
+
+        while(!queue.isEmpty()) {
+
+            int size = queue.size();
+
+            if(level == k) {
+
+                while(!queue.isEmpty())
+                    result.add(queue.poll().val);
+
+                return result;
+            }
+
+
+            for(int i = 0; i < size; i++) {
+
+                TreeNode node = queue.poll();
+
+                if(node.left != null && visited.add(node.left))
+                    queue.offer(node.left);
+
+                if(node.right != null && visited.add(node.right))
+                    queue.offer(node.right);
+
+                if(parent.get(node) != null &&
+                   visited.add(parent.get(node)))
+                    queue.offer(parent.get(node));
+            }
+
+            level++;
+        }
+
+        return result;
+    }
+
+
+    private void buildParent(TreeNode node, TreeNode par) {
+
+        if(node == null)
+            return;
+
+        parent.put(node, par);
+
+        buildParent(node.left, node);
+        buildParent(node.right, node);
+    }
+}
+
+
+
+3. Validate Binary Tree Nodes — LeetCode (Java)
+
+class Solution {
+
+    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
+
+        int[] indegree = new int[n];
+
+
+        for(int i = 0; i < n; i++) {
+
+            if(leftChild[i] != -1) {
+
+                indegree[leftChild[i]]++;
+
+                if(indegree[leftChild[i]] > 1)
+                    return false;
+            }
+
+
+            if(rightChild[i] != -1) {
+
+                indegree[rightChild[i]]++;
+
+                if(indegree[rightChild[i]] > 1)
+                    return false;
+            }
+        }
+
+
+        int root = -1;
+
+        for(int i = 0; i < n; i++) {
+
+            if(indegree[i] == 0) {
+
+                if(root != -1)
+                    return false;
+
+                root = i;
+            }
+        }
+
+
+        if(root == -1)
+            return false;
+
+
+        boolean[] visited = new boolean[n];
+
+        return dfs(root, leftChild, rightChild, visited) == n;
+    }
+
+
+    private int dfs(int node, int[] left, int[] right, boolean[] visited) {
+
+        if(node == -1)
+            return 0;
+
+        if(visited[node])
+            return -100000;
+
+        visited[node] = true;
+
+        return 1 +
+               dfs(left[node], left, right, visited) +
+               dfs(right[node], left, right, visited);
+    }
+}
+
+
+
+4. Longest Univalue Path — LeetCode (Java)
+
+
+class Solution {
+
+    int ans = 0;
+
+    public int longestUnivaluePath(TreeNode root) {
+
+        dfs(root);
+
+        return ans;
+    }
+
+
+    private int dfs(TreeNode node) {
+
+        if(node == null)
+            return 0;
+
+
+        int left = dfs(node.left);
+        int right = dfs(node.right);
+
+
+        int leftPath = 0;
+        int rightPath = 0;
+
+
+        if(node.left != null && node.left.val == node.val)
+            leftPath = left + 1;
+
+
+        if(node.right != null && node.right.val == node.val)
+            rightPath = right + 1;
+
+
+        ans = Math.max(ans, leftPath + rightPath);
+
+
+        return Math.max(leftPath, rightPath);
+    }
+}
+
+
+
+5. Closest Nodes Queries in a Binary Search Tree — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    List<Integer> list = new ArrayList<>();
+
+    public List<List<Integer>> closestNodes(TreeNode root, List<Integer> queries) {
+
+        inorder(root);
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for(int q : queries) {
+
+            int index = Collections.binarySearch(list, q);
+
+            if(index >= 0) {
+
+                result.add(Arrays.asList(q, q));
+            }
+            else {
+
+                index = -index - 1;
+
+                int low = index - 1;
+                int high = index;
+
+                result.add(Arrays.asList(
+                    low >= 0 ? list.get(low) : -1,
+                    high < list.size() ? list.get(high) : -1
+                ));
+            }
+        }
+
+        return result;
+    }
+
+
+    private void inorder(TreeNode node) {
+
+        if(node == null)
+            return;
+
+        inorder(node.left);
+
+        list.add(node.val);
+
+        inorder(node.right);
+    }
+}
+
+
+
+6. Maximum Width of Binary Tree — LeetCode (Java)
+
+
+import java.util.*;
+
+class Solution {
+
+    public int widthOfBinaryTree(TreeNode root) {
+
+        if(root == null)
+            return 0;
+
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<Integer> index = new LinkedList<>();
+
+        queue.offer(root);
+        index.offer(0);
+
+        int ans = 0;
+
+
+        while(!queue.isEmpty()) {
+
+            int size = queue.size();
+
+            int start = index.peek();
+            int end = start;
+
+
+            for(int i = 0; i < size; i++) {
+
+                TreeNode node = queue.poll();
+                int pos = index.poll();
+
+                end = pos;
+
+
+                if(node.left != null) {
+
+                    queue.offer(node.left);
+                    index.offer(2 * pos + 1);
+                }
+
+
+                if(node.right != null) {
+
+                    queue.offer(node.right);
+                    index.offer(2 * pos + 2);
+                }
+            }
+
+
+            ans = Math.max(ans, end - start + 1);
+        }
+
+
+        return ans;
+    }
+}
+
+
+
+7. Linked List in Binary Tree — LeetCode (Java)
+
+
+class Solution {
+
+    public boolean isSubPath(ListNode head, TreeNode root) {
+
+        if(root == null)
+            return false;
+
+
+        return check(head, root) ||
+               isSubPath(head, root.left) ||
+               isSubPath(head, root.right);
+    }
+
+
+    private boolean check(ListNode head, TreeNode node) {
+
+        if(head == null)
+            return true;
+
+        if(node == null)
+            return false;
+
+
+        return head.val == node.val &&
+               (check(head.next, node.left) ||
+                check(head.next, node.right));
+    }
+}
+
+
+
+8. Operations on Tree — LeetCode (Java)
+
+import java.util.*;
+
+class LockingTree {
+
+    int[] parent;
+    List<Integer>[] children;
+    int[] lock;
+
+
+    public LockingTree(int[] parent) {
+
+        this.parent = parent;
+
+        int n = parent.length;
+
+        children = new ArrayList[n];
+
+        for(int i = 0; i < n; i++)
+            children[i] = new ArrayList<>();
+
+        for(int i = 1; i < n; i++)
+            children[parent[i]].add(i);
+
+        lock = new int[n];
+    }
+
+
+    public boolean lock(int num, int user) {
+
+        if(lock[num] != 0)
+            return false;
+
+        lock[num] = user;
+
+        return true;
+    }
+
+
+    public boolean unlock(int num, int user) {
+
+        if(lock[num] != user)
+            return false;
+
+        lock[num] = 0;
+
+        return true;
+    }
+
+
+    public boolean upgrade(int num, int user) {
+
+        int p = parent[num];
+
+        while(p != -1) {
+
+            if(lock[p] != 0)
+                return false;
+
+            p = parent[p];
+        }
+
+
+        if(!hasLockedChild(num))
+            return false;
+
+
+        unlockChildren(num);
+
+        lock[num] = user;
+
+        return true;
+    }
+
+
+    private boolean hasLockedChild(int node) {
+
+        if(lock[node] != 0)
+            return true;
+
+        for(int child : children[node]) {
+
+            if(hasLockedChild(child))
+                return true;
+        }
+
+        return false;
+    }
+
+
+    private void unlockChildren(int node) {
+
+        lock[node] = 0;
+
+        for(int child : children[node])
+            unlockChildren(child);
+    }
+}
+
+
+
+9. Verify Preorder Serialization of a Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    public boolean isValidSerialization(String preorder) {
+
+        String[] nodes = preorder.split(",");
+
+        int slots = 1;
+
+
+        for(String node : nodes) {
+
+            slots--;
+
+            if(slots < 0)
+                return false;
+
+
+            if(!node.equals("#"))
+                slots += 2;
+        }
+
+
+        return slots == 0;
+    }
+}
+
+
+
+10. Kth Largest Sum in a Binary Tree — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    public long kthLargestLevelSum(TreeNode root, int k) {
+
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.offer(root);
+
+
+        while(!queue.isEmpty()) {
+
+            int size = queue.size();
+
+            long sum = 0;
+
+
+            while(size-- > 0) {
+
+                TreeNode node = queue.poll();
+
+                sum += node.val;
+
+
+                if(node.left != null)
+                    queue.offer(node.left);
+
+                if(node.right != null)
+                    queue.offer(node.right);
+            }
+
+
+            pq.offer(sum);
+
+            if(pq.size() > k)
+                pq.poll();
+        }
+
+
+        return pq.size() == k ? pq.peek() : -1;
+    }
+}
+
+
+
+11. Count Nodes With the Highest Score — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    long maxScore = 0;
+    int count = 0;
+    List<Integer>[] tree;
+
+
+    public int countHighestScoreNodes(int[] parents) {
+
+        int n = parents.length;
+
+        tree = new ArrayList[n];
+
+
+        for(int i = 0; i < n; i++)
+            tree[i] = new ArrayList<>();
+
+
+        for(int i = 1; i < n; i++)
+            tree[parents[i]].add(i);
+
+
+        dfs(0, n);
+
+
+        return count;
+    }
+
+
+    private int dfs(int node, int n) {
+
+        long score = 1;
+
+        int size = 1;
+
+
+        for(int child : tree[node]) {
+
+            int childSize = dfs(child, n);
+
+            size += childSize;
+
+            score *= childSize;
+        }
+
+
+        int rest = n - size;
+
+        if(rest > 0)
+            score *= rest;
+
+
+        if(score > maxScore) {
+
+            maxScore = score;
+            count = 1;
+        }
+        else if(score == maxScore) {
+
+            count++;
+        }
+
+
+        return size;
+    }
+}
+
+
+
+1. Kth Ancestor of a Tree Node — LeetCode (Java)
+
+
+class TreeAncestor {
+
+    int[][] up;
+    int LOG = 16;
+
+    public TreeAncestor(int n, int[] parent) {
+
+        while((1 << LOG) <= n)
+            LOG++;
+
+        up = new int[LOG][n];
+
+        for(int i = 0; i < n; i++)
+            up[0][i] = parent[i];
+
+
+        for(int j = 1; j < LOG; j++) {
+
+            for(int i = 0; i < n; i++) {
+
+                if(up[j-1][i] == -1)
+                    up[j][i] = -1;
+                else
+                    up[j][i] = up[j-1][up[j-1][i]];
+            }
+        }
+    }
+
+
+    public int getKthAncestor(int node, int k) {
+
+        int bit = 0;
+
+        while(k > 0) {
+
+            if((k & 1) == 1)
+                node = up[bit][node];
+
+            if(node == -1)
+                return -1;
+
+            k >>= 1;
+            bit++;
+        }
+
+        return node;
+    }
+}
+
+
+
+2. Difference Between Maximum and Minimum Price Sum — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    long answer = 0;
+    List<Integer>[] tree;
+    int[] price;
+
+
+    public long maxOutput(int n, int[][] edges, int[] price) {
+
+        this.price = price;
+
+        tree = new ArrayList[n];
+
+        for(int i=0;i<n;i++)
+            tree[i] = new ArrayList<>();
+
+        for(int[] e : edges) {
+
+            tree[e[0]].add(e[1]);
+            tree[e[1]].add(e[0]);
+        }
+
+
+        dfs(0,-1);
+
+        return answer;
+    }
+
+
+    private long dfs(int node,int parent) {
+
+        long maxChild = 0;
+
+        for(int child : tree[node]) {
+
+            if(child != parent) {
+
+                maxChild = Math.max(
+                    maxChild,
+                    dfs(child,node)
+                );
+            }
+        }
+
+
+        answer = Math.max(
+            answer,
+            maxChild + price[node]
+        );
+
+
+        return maxChild + price[node];
+    }
+}
+
+
+
+3. Merge BSTs to Create Single BST — LeetCode (Java)
+
+
+import java.util.*;
+
+class Solution {
+
+    Map<Integer, TreeNode> map = new HashMap<>();
+    Set<Integer> leaves = new HashSet();
+
+
+    public TreeNode canMerge(List<TreeNode> trees) {
+
+        for(TreeNode node : trees) {
+
+            map.put(node.val,node);
+
+            if(node.left != null)
+                leaves.add(node.left.val);
+
+            if(node.right != null)
+                leaves.add(node.right.val);
+        }
+
+
+        TreeNode root = null;
+
+        for(TreeNode node : trees) {
+
+            if(!leaves.contains(node.val)) {
+
+                root = node;
+                break;
+            }
+        }
+
+
+        if(root == null)
+            return null;
+
+
+        map.remove(root.val);
+
+        if(!dfs(root, Integer.MIN_VALUE, Integer.MAX_VALUE))
+            return null;
+
+
+        if(!map.isEmpty())
+            return null;
+
+
+        return root;
+    }
+
+
+    private boolean dfs(TreeNode node,int min,int max) {
+
+        if(node == null)
+            return true;
+
+
+        if(node.val <= min || node.val >= max)
+            return false;
+
+
+        if(node.left != null && map.containsKey(node.left.val)) {
+
+            node.left = map.remove(node.left.val);
+        }
+
+
+        if(node.right != null && map.containsKey(node.right.val)) {
+
+            node.right = map.remove(node.right.val);
+        }
+
+
+        return dfs(node.left,min,node.val) &&
+               dfs(node.right,node.val,max);
+    }
+}
+
+
+
+4. Frog Position After T Seconds — LeetCode (Java)
+
+
+import java.util.*;
+
+class Solution {
+
+    List<Integer>[] graph;
+
+
+    public double frogPosition(int n,int[][] edges,int t,int target) {
+
+        graph = new ArrayList[n+1];
+
+        for(int i=1;i<=n;i++)
+            graph[i]=new ArrayList<>();
+
+        for(int[] e:edges){
+
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
+        }
+
+
+        return dfs(1,-1,t,target);
+    }
+
+
+    private double dfs(int node,int parent,int t,int target){
+
+        if(t==0)
+            return node==target ? 1.0 : 0.0;
+
+
+        int children=0;
+
+        for(int next:graph[node]) {
+
+            if(next!=parent)
+                children++;
+        }
+
+
+        if(children==0)
+            return node==target ? 1.0 : 0.0;
+
+
+        for(int next:graph[node]) {
+
+            if(next!=parent){
+
+                double res=dfs(next,node,t-1,target);
+
+                if(res>0)
+                    return res/children;
+            }
+        }
+
+        return 0;
+    }
+}
+
+
+
+5. Height of Binary Tree After Subtree Removal Queries — LeetCode (Java)
+
+class Solution {
+
+    int[] height;
+    int[] answer;
+
+
+    public int[] treeQueries(TreeNode root,int[] queries){
+
+        int max=100001;
+
+        height=new int[max];
+        answer=new int[max];
+
+
+        calculate(root);
+
+
+        dfs(root,0);
+
+
+        int[] result=new int[queries.length];
+
+        for(int i=0;i<queries.length;i++)
+            result[i]=answer[queries[i]];
+
+
+        return result;
+    }
+
+
+    private int calculate(TreeNode node){
+
+        if(node==null)
+            return 0;
+
+
+        height[node.val]=Math.max(
+            calculate(node.left),
+            calculate(node.right)
+        )+1;
+
+
+        return height[node.val];
+    }
+
+
+    private void dfs(TreeNode node,int maxHeight){
+
+        if(node==null)
+            return;
+
+
+        answer[node.val]=maxHeight;
+
+
+        dfs(node.left,
+            Math.max(maxHeight,
+            height[node.right]));
+
+
+        dfs(node.right,
+            Math.max(maxHeight,
+            height[node.left]));
+    }
+}
+
+
+
+6. Collect Coins in a Tree — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    public int collectTheCoins(int[] coins,int[][] edges){
+
+        int n=coins.length;
+
+        List<Integer>[] graph=new ArrayList[n];
+
+        for(int i=0;i<n;i++)
+            graph[i]=new ArrayList<>();
+
+        int[] degree=new int[n];
+
+
+        for(int[] e:edges){
+
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
+
+            degree[e[0]]++;
+            degree[e[1]]++;
+        }
+
+
+        Queue<Integer> q=new LinkedList<>();
+
+        for(int i=0;i<n;i++){
+
+            if(degree[i]==1 && coins[i]==0)
+                q.offer(i);
+        }
+
+
+        while(!q.isEmpty()){
+
+            int node=q.poll();
+
+            degree[node]--;
+
+            for(int next:graph[node]){
+
+                if(--degree[next]==1 && coins[next]==0)
+                    q.offer(next);
+            }
+        }
+
+
+        return 0;
+    }
+}
+
+
+
+7. Binary Tree Maximum Path Sum — LeetCode (Java)
+
+
+class Solution {
+
+    int max = Integer.MIN_VALUE;
+
+
+    public int maxPathSum(TreeNode root){
+
+        dfs(root);
+
+        return max;
+    }
+
+
+    private int dfs(TreeNode node){
+
+        if(node==null)
+            return 0;
+
+
+        int left=Math.max(0,dfs(node.left));
+        int right=Math.max(0,dfs(node.right));
+
+
+        max=Math.max(
+            max,
+            left+right+node.val
+        );
+
+
+        return Math.max(left,right)+node.val;
+    }
+}
+
+
+
+8. Tree of Coprimes — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    List<Integer>[] graph;
+    int[] nums;
+    int[] result;
+
+
+    public int[] getCoprimes(int[] nums,int[][] edges){
+
+        this.nums=nums;
+
+        int n=nums.length;
+
+        graph=new ArrayList[n];
+
+        for(int i=0;i<n;i++)
+            graph[i]=new ArrayList<>();
+
+        for(int[] e:edges){
+
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
+        }
+
+
+        result=new int[n];
+
+        Arrays.fill(result,-1);
+
+        dfs(0,-1,new int[51],new int[51]);
+
+        return result;
+    }
+
+
+    private void dfs(int node,int parent,int[] depth,int[] index){
+
+        int bestDepth=-1;
+
+
+        for(int i=1;i<=50;i++){
+
+            if(depth[i]>0 &&
+               gcd(nums[node],i)==1 &&
+               depth[i]>bestDepth){
+
+                bestDepth=depth[i];
+                result[node]=index[i];
+            }
+        }
+
+
+        int d=depth[nums[node]];
+        int old=index[nums[node]];
+
+        depth[nums[node]]=d+1;
+        index[nums[node]]=node;
+
+
+        for(int next:graph[node]){
+
+            if(next!=parent)
+                dfs(next,node,depth,index);
+        }
+
+
+        depth[nums[node]]=d;
+        index[nums[node]]=old;
+    }
+
+
+    private int gcd(int a,int b){
+
+        while(b!=0){
+
+            int t=a%b;
+            a=b;
+            b=t;
+        }
+
+        return a;
+    }
+}
+
+
+
+9. Maximum Sum BST in Binary Tree — LeetCode (Java)
+
+class Solution {
+
+    int answer=0;
+
+
+    public int maxSumBST(TreeNode root){
+
+        dfs(root);
+
+        return answer;
+    }
+
+
+    private int[] dfs(TreeNode node){
+
+        if(node==null)
+            return new int[]{
+                1,
+                Integer.MAX_VALUE,
+                Integer.MIN_VALUE,
+                0
+            };
+
+
+        int[] left=dfs(node.left);
+        int[] right=dfs(node.right);
+
+
+        if(left[0]==1 &&
+           right[0]==1 &&
+           node.val>left[2] &&
+           node.val<right[1]){
+
+
+            int sum=left[3]+right[3]+node.val;
+
+            answer=Math.max(answer,sum);
+
+
+            return new int[]{
+                1,
+                Math.min(left[1],node.val),
+                Math.max(right[2],node.val),
+                sum
+            };
+        }
+
+
+        return new int[]{0,0,0,0};
+    }
+}
+
+
+
+10. Minimize the Total Price of the Trips — LeetCode (Java)
+
+
+class Solution {
+
+    List<Integer>[] graph;
+    int[] price;
+    int[] count;
+
+
+    public int minimumTotalPrice(
+        int n,int[][] edges,int[] price,int[][] trips){
+
+        this.price=price;
+
+        graph=new ArrayList[n];
+
+        for(int i=0;i<n;i++)
+            graph[i]=new ArrayList<>();
+
+        for(int[] e:edges){
+
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]);
+        }
+
+
+        count=new int[n];
+
+
+        for(int[] trip:trips){
+
+            find(trip[0],-1,trip[1]);
+        }
+
+
+        return (int)dfs(0,-1)[0];
+    }
+
+
+    private boolean find(int node,int parent,int target){
+
+        if(node==target){
+
+            count[node]++;
+            return true;
+        }
+
+
+        for(int next:graph[node]){
+
+            if(next!=parent &&
+               find(next,node,target)){
+
+                count[node]++;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    private long[] dfs(int node,int parent){
+
+        long no=price[node]*count[node];
+        long yes=no/2;
+
+
+        for(int next:graph[node]){
+
+            if(next!=parent){
+
+                long[] child=dfs(next,node);
+
+                no+=Math.min(child[0],child[1]);
+                yes+=child[0];
+            }
+        }
+
+
+        return new long[]{no,yes};
+    }
+}
+
+
+11. Number Of Ways To Reconstruct A Tree — LeetCode (Java)
+
+import java.util.*;
+
+class Solution {
+
+    public int checkWays(int[][] pairs){
+
+        Map<Integer,Set<Integer>> map=new HashMap<>();
+
+        for(int[] p:pairs){
+
+            map.putIfAbsent(p[0],new HashSet<>());
+            map.putIfAbsent(p[1],new HashSet<>());
+
+            map.get(p[0]).add(p[1]);
+            map.get(p[1]).add(p[0]);
+        }
+
+
+        int root=-1;
+
+
+        for(int node:map.keySet()){
+
+            if(root==-1 ||
+               map.get(node).size()>map.get(root).size())
+
+                root=node;
+        }
+
+
+        if(map.get(root).size()!=map.size()-1)
+            return 0;
+
+
+        int result=1;
+
+
+        for(int node:map.keySet()){
+
+            if(node==root)
+                continue;
+
+
+            int parent=-1;
+
+
+            for(int candidate:map.get(node)){
+
+                if(map.get(candidate).size()>=map.get(node).size() &&
+                   (parent==-1 ||
+                    map.get(candidate).size()<map.get(parent).size()))
+
+                    parent=candidate;
+            }
+
+
+            if(parent==-1)
+                return 0;
+
+
+            for(int neighbor:map.get(node)){
+
+                if(neighbor!=parent &&
+                   !map.get(parent).contains(neighbor))
+
+                    return 0;
+            }
+
+
+            if(map.get(parent).size()==map.get(node).size())
+                result=2;
+        }
+
+
+        return result;
+    }
+}

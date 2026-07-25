@@ -1,0 +1,352 @@
+1. Object-Oriented Paradigms in Java
+
+
+class Student {
+    String name;
+
+    void display() {
+        System.out.println("Student Name: " + name);
+    }
+}
+
+public class OOPParadigm {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.name = "Kunal";
+        s.display();
+    }
+}
+
+
+
+2. Constructors in Java
+
+class Student {
+    String name;
+    int age;
+
+    Student() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    Student(String n, int a) {
+        name = n;
+        age = a;
+    }
+
+    void display() {
+        System.out.println(name + " " + age);
+    }
+}
+
+public class ConstructorExample {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = new Student("Kunal", 20);
+
+        s1.display();
+        s2.display();
+    }
+}
+
+
+
+3. Constructor Chaining in Java
+
+class Student {
+
+    Student() {
+        this("Kunal");
+        System.out.println("Default Constructor");
+    }
+
+    Student(String name) {
+        System.out.println("Name: " + name);
+    }
+}
+
+public class ConstructorChaining {
+    public static void main(String[] args) {
+        Student s = new Student();
+    }
+}
+
+
+
+4. Inheritance in Java
+
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+
+        d.eat();
+        d.bark();
+    }
+}
+
+
+
+5. Method Overriding in Java
+
+
+class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class OverridingExample {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+
+        a.sound();
+    }
+}
+
+
+
+6. Abstraction in Java
+
+Using Abstract Class
+abstract class Vehicle {
+
+    abstract void start();
+
+    void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+
+class Car extends Vehicle {
+
+    void start() {
+        System.out.println("Car starts");
+    }
+}
+
+public class AbstractionExample {
+    public static void main(String[] args) {
+        Vehicle v = new Car();
+
+        v.start();
+        v.stop();
+    }
+}
+
+
+
+7. Access Modifiers in Java
+
+class AccessExample {
+
+    public int publicValue = 10;
+    private int privateValue = 20;
+    protected int protectedValue = 30;
+    int defaultValue = 40;
+
+    void display() {
+        System.out.println(publicValue);
+        System.out.println(privateValue);
+        System.out.println(protectedValue);
+        System.out.println(defaultValue);
+    }
+}
+
+public class AccessModifiers {
+    public static void main(String[] args) {
+
+        AccessExample obj = new AccessExample();
+
+        obj.display();
+        System.out.println(obj.publicValue);
+    }
+}
+
+
+
+8. Wrapper Classes in Java
+
+public class WrapperClassExample {
+
+    public static void main(String[] args) {
+
+        int num = 100;
+
+        Integer obj = Integer.valueOf(num);
+
+        System.out.println("Primitive value: " + num);
+        System.out.println("Wrapper object: " + obj);
+
+        int value = obj.intValue();
+
+        System.out.println("Converted value: " + value);
+    }
+}
+
+
+
+
+1. Inheritance I — HackerRank (Java)
+
+class Animal {
+    void walk() {
+        System.out.println("I am walking");
+    }
+}
+
+class Bird extends Animal {
+    void fly() {
+        System.out.println("I am flying");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bird bird = new Bird();
+        bird.walk();
+        bird.fly();
+    }
+}
+
+
+
+2. Inheritance II — HackerRank (Java)
+
+class Animal {
+    void walk() {
+        System.out.println("I am walking");
+    }
+}
+
+class Bird extends Animal {
+    void fly() {
+        System.out.println("I am flying");
+    }
+
+    void sing() {
+        System.out.println("I am singing");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bird bird = new Bird();
+        bird.walk();
+        bird.fly();
+        bird.sing();
+    }
+}
+
+
+
+3. Java Abstract Class — HackerRank (Java)
+
+abstract class Book {
+    String title;
+
+    abstract void setTitle(String s);
+
+    String getTitle() {
+        return title;
+    }
+}
+
+class MyBook extends Book {
+    void setTitle(String s) {
+        title = s;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyBook myBook = new MyBook();
+        myBook.setTitle("Java Programming");
+        System.out.println("The title is: " + myBook.getTitle());
+    }
+}
+
+
+
+4. Interface — HackerRank (Java)
+
+interface AdvancedArithmetic {
+    int divisorSum(int n);
+}
+
+class MyCalculator implements AdvancedArithmetic {
+
+    public int divisorSum(int n) {
+        int sum = 0;
+
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                sum += i;
+            }
+        }
+
+        return sum;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyCalculator calculator = new MyCalculator();
+        System.out.println(calculator.divisorSum(6));
+    }
+}
+
+
+
+5. Method Overriding I — HackerRank (Java)
+
+class Sports {
+    String getName() {
+        return "Generic Sports";
+    }
+
+    void getNumberOfTeamMembers() {
+        System.out.println("Each team has n players");
+    }
+}
+
+class Soccer extends Sports {
+
+    @Override
+    String getName() {
+        return "Soccer Class";
+    }
+
+    @Override
+    void getNumberOfTeamMembers() {
+        System.out.println("Each team has 11 players");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Soccer soccer = new Soccer();
+
+        System.out.println(soccer.getName());
+        soccer.getNumberOfTeamMembers();
+    }
+}

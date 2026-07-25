@@ -1,0 +1,920 @@
+EASY
+
+1. Sum Triangle from Array (GFG)
+
+
+import java.util.*;
+
+public class SumTriangle {
+    
+    static void printTriangle(int[] arr, int n) {
+        if (n == 1) {
+            System.out.println(arr[0]);
+            return;
+        }
+
+        int[] temp = new int[n - 1];
+
+        for (int i = 0; i < n - 1; i++) {
+            temp[i] = arr[i] + arr[i + 1];
+        }
+
+        printTriangle(temp, n - 1);
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        printTriangle(arr, arr.length);
+    }
+}
+
+
+
+2. Maximum and Minimum Value in an Array (GFG)
+
+public class MaxMinArray {
+
+    static int max(int[] arr, int index) {
+        if (index == arr.length - 1)
+            return arr[index];
+
+        return Math.max(arr[index], max(arr, index + 1));
+    }
+
+    static int min(int[] arr, int index) {
+        if (index == arr.length - 1)
+            return arr[index];
+
+        return Math.min(arr[index], min(arr, index + 1));
+    }
+
+    public static void main(String[] args) {
+
+        int[] arr = {5, 2, 9, 1, 7};
+
+        System.out.println("Maximum: " + max(arr, 0));
+        System.out.println("Minimum: " + min(arr, 0));
+    }
+}
+
+
+
+3. Binary Search Using Recursion (LeetCode)
+
+public class BinarySearch {
+
+    static int search(int[] nums, int target, int start, int end) {
+
+        if (start > end)
+            return -1;
+
+        int mid = start + (end - start) / 2;
+
+        if (nums[mid] == target)
+            return mid;
+
+        if (nums[mid] > target)
+            return search(nums, target, start, mid - 1);
+
+        return search(nums, target, mid + 1, end);
+    }
+
+    public static void main(String[] args) {
+
+        int[] nums = {-1,0,3,5,9,12};
+
+        System.out.println(search(nums, 9, 0, nums.length - 1));
+    }
+}
+
+
+
+4. First Uppercase Letter in a String (GFG)
+
+public class FirstUppercase {
+
+    static char findUpper(String str, int index) {
+
+        if (index == str.length())
+            return '\0';
+
+        if (Character.isUpperCase(str.charAt(index)))
+            return str.charAt(index);
+
+        return findUpper(str, index + 1);
+    }
+
+    public static void main(String[] args) {
+
+        String str = "geeksforgeeKs";
+
+        char result = findUpper(str, 0);
+
+        if(result == '\0')
+            System.out.println("No uppercase letter");
+        else
+            System.out.println(result);
+    }
+}
+
+
+
+5. Reverse String (LeetCode)
+
+public class ReverseString {
+
+    static void reverse(char[] s, int left, int right) {
+
+        if(left >= right)
+            return;
+
+        char temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+
+        reverse(s, left + 1, right - 1);
+    }
+
+    public static void main(String[] args) {
+
+        char[] s = {'h','e','l','l','o'};
+
+        reverse(s,0,s.length-1);
+
+        for(char c : s)
+            System.out.print(c);
+    }
+}
+
+
+
+6. Print 1 To N Without Loop (GFG)
+
+public class Print1ToN {
+
+    static void print(int n) {
+
+        if(n == 0)
+            return;
+
+        print(n - 1);
+
+        System.out.print(n + " ");
+    }
+
+    public static void main(String[] args) {
+
+        print(10);
+
+    }
+}
+
+
+
+7. Fibonacci Number (LeetCode)
+
+public class Fibonacci {
+
+    static int fib(int n) {
+
+        if(n <= 1)
+            return n;
+
+        return fib(n-1) + fib(n-2);
+    }
+
+
+    public static void main(String[] args) {
+
+        int n = 6;
+
+        System.out.println(fib(n));
+    }
+}
+
+
+
+8. Special Fibonacci (CodeChef)
+
+import java.util.*;
+
+public class SpecialFibonacci {
+
+    static long fib(long a, long b, int n) {
+
+        if(n == 1)
+            return a;
+
+        if(n == 2)
+            return b;
+
+        return fib(b, a + b, n - 1);
+    }
+
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        int n = sc.nextInt();
+
+        System.out.println(fib(a, b, n));
+    }
+}
+
+MEDIUM
+
+
+
+1. Combination Sum (LeetCode)
+
+
+import java.util.*;
+
+public class CombinationSum {
+
+    static void solve(int[] candidates, int target, int index,
+                      List<Integer> list, List<List<Integer>> ans) {
+
+        if (target == 0) {
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        if (index == candidates.length || target < 0)
+            return;
+
+        // Include current element
+        list.add(candidates[index]);
+        solve(candidates, target - candidates[index], index, list, ans);
+        list.remove(list.size() - 1);
+
+        // Exclude current element
+        solve(candidates, target, index + 1, list, ans);
+    }
+
+
+    public static void main(String[] args) {
+
+        int[] candidates = {2,3,6,7};
+        int target = 7;
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        solve(candidates, target, 0,
+              new ArrayList<>(), ans);
+
+        System.out.println(ans);
+    }
+}
+
+
+
+2. Word Search (LeetCode)
+
+
+public class WordSearch {
+
+    static boolean dfs(char[][] board, String word,
+                       int i, int j, int index) {
+
+        if(index == word.length())
+            return true;
+
+        if(i < 0 || j < 0 ||
+           i >= board.length ||
+           j >= board[0].length ||
+           board[i][j] != word.charAt(index))
+            return false;
+
+
+        char temp = board[i][j];
+        board[i][j] = '#';
+
+
+        boolean found =
+            dfs(board, word, i+1, j, index+1) ||
+            dfs(board, word, i-1, j, index+1) ||
+            dfs(board, word, i, j+1, index+1) ||
+            dfs(board, word, i, j-1, index+1);
+
+
+        board[i][j] = temp;
+
+        return found;
+    }
+
+
+    public static void main(String[] args) {
+
+        char[][] board = {
+            {'A','B','C','E'},
+            {'S','F','C','S'},
+            {'A','D','E','E'}
+        };
+
+        String word="ABCCED";
+
+        System.out.println(dfs(board,word,0,0,0));
+    }
+}
+
+
+
+3. Target Sum (LeetCode)
+
+public class TargetSum {
+
+    static int count(int[] nums, int index, int sum, int target){
+
+        if(index == nums.length){
+            return sum == target ? 1 : 0;
+        }
+
+
+        int add = count(nums,index+1,
+                        sum+nums[index],target);
+
+
+        int subtract = count(nums,index+1,
+                             sum-nums[index],target);
+
+
+        return add + subtract;
+    }
+
+
+    public static void main(String[] args){
+
+        int nums[]={1,1,1,1,1};
+
+        System.out.println(
+            count(nums,0,0,3)
+        );
+    }
+}
+
+
+
+4. Find Kth Bit in Nth Binary String (LeetCode)
+
+public class KthBit {
+
+    static char find(int n, int k){
+
+        if(n==1)
+            return '0';
+
+
+        int length=(1<<n)-1;
+        int mid=(length/2)+1;
+
+
+        if(k==mid)
+            return '1';
+
+
+        if(k<mid)
+            return find(n-1,k);
+
+
+        char ch=find(n-1,length-k);
+
+        return ch=='0'?'1':'0';
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(find(4,11));
+    }
+}
+
+
+5. K-th Symbol in Grammar (LeetCode)
+
+
+public class KthSymbolGrammar {
+
+    static int kthGrammar(int n,int k){
+
+        if(n==1)
+            return 0;
+
+
+        int parent=kthGrammar(n-1,(k+1)/2);
+
+
+        if(k%2==1)
+            return parent;
+
+        return 1-parent;
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(kthGrammar(4,5));
+    }
+}
+
+
+
+6. Count Good Numbers (LeetCode)
+
+public class CountGoodNumbers {
+
+    static long MOD=1000000007;
+
+
+    static long power(long a,long b){
+
+        if(b==0)
+            return 1;
+
+
+        long half=power(a,b/2);
+
+        long result=(half*half)%MOD;
+
+
+        if(b%2==1)
+            result=(result*a)%MOD;
+
+
+        return result;
+    }
+
+
+    static long countGoodNumbers(long n){
+
+        long even=(n+1)/2;
+        long odd=n/2;
+
+
+        return (power(5,even)*power(4,odd))%MOD;
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(countGoodNumbers(4));
+    }
+}
+
+
+
+7. N Digit Numbers With Digits in Increasing Order (GFG)
+
+public class IncreasingDigits {
+
+
+    static void solve(int n,int start,String ans){
+
+        if(n==0){
+            System.out.println(ans);
+            return;
+        }
+
+
+        for(int i=start;i<=9;i++){
+
+            solve(n-1,i+1,ans+i);
+
+        }
+    }
+
+
+    public static void main(String[] args){
+
+        solve(3,1,"");
+    }
+}
+
+
+
+8. Pow(x,n) (LeetCode)
+
+public class Power {
+
+    static double pow(double x,long n){
+
+        if(n==0)
+            return 1;
+
+
+        double half=pow(x,n/2);
+
+
+        if(n%2==0)
+            return half*half;
+
+
+        return half*half*x;
+    }
+
+
+    public static void main(String[] args){
+
+        int n=10;
+
+        System.out.println(pow(2,n));
+    }
+}
+
+
+HARD
+
+
+
+1. Parsing A Boolean Expression (LeetCode)
+
+
+import java.util.*;
+
+public class ParsingBooleanExpression {
+
+    static boolean parse(String s, int[] index) {
+
+        char ch = s.charAt(index[0]);
+
+        if(ch == 't') {
+            index[0]++;
+            return true;
+        }
+
+        if(ch == 'f') {
+            index[0]++;
+            return false;
+        }
+
+        index[0]++; // skip operator
+        index[0]++; // skip '('
+
+        List<Boolean> values = new ArrayList<>();
+
+        while(s.charAt(index[0]) != ')') {
+
+            if(s.charAt(index[0]) == ',') {
+                index[0]++;
+            }
+            else {
+                values.add(parse(s,index));
+            }
+        }
+
+        index[0]++; // skip ')'
+
+
+        if(ch == '!') {
+            return !values.get(0);
+        }
+
+        if(ch == '&') {
+
+            for(boolean b : values)
+                if(!b) return false;
+
+            return true;
+        }
+
+
+        if(ch == '|') {
+
+            for(boolean b : values)
+                if(b) return true;
+
+            return false;
+        }
+
+        return false;
+    }
+
+
+    public static void main(String[] args) {
+
+        String exp="|(&(t,f,t),!(t))";
+
+        System.out.println(parse(exp,new int[]{0}));
+    }
+}
+
+
+
+2. Special Binary String (LeetCode)
+
+
+import java.util.*;
+
+public class SpecialBinaryString {
+
+    static String makeLargestSpecial(String s) {
+
+        List<String> list = new ArrayList<>();
+
+        int count=0;
+        int start=0;
+
+
+        for(int i=0;i<s.length();i++) {
+
+            if(s.charAt(i)=='1')
+                count++;
+            else
+                count--;
+
+
+            if(count==0) {
+
+                String inner =
+                    s.substring(start+1,i);
+
+                list.add("1"+
+                    makeLargestSpecial(inner)
+                    +"0");
+
+                start=i+1;
+            }
+        }
+
+
+        Collections.sort(list,Collections.reverseOrder());
+
+        StringBuilder ans=new StringBuilder();
+
+        for(String str:list)
+            ans.append(str);
+
+        return ans.toString();
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(
+          makeLargestSpecial("11011000")
+        );
+    }
+}
+
+
+
+3. Permutation Sequence (LeetCode)
+
+import java.util.*;
+
+public class PermutationSequence {
+
+
+    static String getPermutation(int n,int k){
+
+        List<Integer> nums=new ArrayList<>();
+
+        int fact=1;
+
+        for(int i=1;i<n;i++){
+            fact*=i;
+        }
+
+
+        for(int i=1;i<=n;i++)
+            nums.add(i);
+
+
+        k--;
+
+
+        StringBuilder ans=new StringBuilder();
+
+
+        while(true){
+
+            ans.append(nums.get(k/fact));
+
+            nums.remove(k/fact);
+
+
+            if(nums.size()==0)
+                break;
+
+
+            k%=fact;
+
+            fact/=nums.size();
+        }
+
+
+        return ans.toString();
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(
+          getPermutation(3,3)
+        );
+    }
+}
+
+
+
+4. Next Happy Number (GFG)
+
+public class NextHappyNumber {
+
+
+    static int sumSquare(int n){
+
+        int sum=0;
+
+        while(n>0){
+
+            int d=n%10;
+
+            sum+=d*d;
+
+            n/=10;
+        }
+
+        return sum;
+    }
+
+
+    static boolean isHappy(int n){
+
+        int slow=n;
+        int fast=n;
+
+
+        do{
+
+            slow=sumSquare(slow);
+
+            fast=sumSquare(sumSquare(fast));
+
+
+        }while(slow!=fast);
+
+
+        return slow==1;
+    }
+
+
+    static int nextHappy(int n){
+
+        n++;
+
+        while(!isHappy(n))
+            n++;
+
+        return n;
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(nextHappy(8));
+    }
+}
+
+
+
+5. Basic Calculator (LeetCode)
+
+
+import java.util.*;
+
+public class BasicCalculator {
+
+
+    static int calculate(String s){
+
+        Stack<Integer> stack=new Stack<>();
+
+        int result=0;
+        int number=0;
+        int sign=1;
+
+
+        for(int i=0;i<s.length();i++){
+
+            char c=s.charAt(i);
+
+
+            if(Character.isDigit(c)){
+
+                number=number*10+(c-'0');
+            }
+
+            else if(c=='+'){
+
+                result+=sign*number;
+
+                number=0;
+
+                sign=1;
+            }
+
+            else if(c=='-'){
+
+                result+=sign*number;
+
+                number=0;
+
+                sign=-1;
+            }
+
+            else if(c=='('){
+
+                stack.push(result);
+
+                stack.push(sign);
+
+                result=0;
+
+                sign=1;
+            }
+
+            else if(c==')'){
+
+                result+=sign*number;
+
+                number=0;
+
+                result*=stack.pop();
+
+                result+=stack.pop();
+            }
+        }
+
+
+        return result+sign*number;
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(
+          calculate("(1+(4+5+2)-3)+(6+8)")
+        );
+    }
+}
+
+
+
+6. Integer to English Words (LeetCode)
+
+public class IntegerToEnglishWords {
+
+
+    static String[] below20={
+        "","One","Two","Three","Four","Five",
+        "Six","Seven","Eight","Nine","Ten",
+        "Eleven","Twelve","Thirteen","Fourteen",
+        "Fifteen","Sixteen","Seventeen",
+        "Eighteen","Nineteen"
+    };
+
+
+    static String[] tens={
+        "","","Twenty","Thirty","Forty",
+        "Fifty","Sixty","Seventy","Eighty","Ninety"
+    };
+
+
+    static String convert(int n){
+
+        if(n<20)
+            return below20[n];
+
+        if(n<100)
+            return tens[n/10]+" "+convert(n%10);
+
+        if(n<1000)
+            return convert(n/100)+" Hundred "+convert(n%100);
+
+
+        if(n<1000000)
+            return convert(n/1000)+" Thousand "+convert(n%1000);
+
+
+        if(n<1000000000)
+            return convert(n/1000000)+" Million "+convert(n%1000000);
+
+
+        return convert(n/1000000000)+" Billion "+convert(n%1000000000);
+    }
+
+
+    public static void main(String[] args){
+
+        System.out.println(convert(12345));
+    }
+}

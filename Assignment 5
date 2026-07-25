@@ -1,0 +1,595 @@
+EASY
+
+1. Build Array from Permutation (LeetCode 1920)
+
+class Solution {
+    public int[] buildArray(int[] nums) {
+        int[] ans = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = nums[nums[i]];
+        }
+
+        return ans;
+    }
+}
+
+
+
+2. Concatenation of Array (LeetCode 1929)
+
+class Solution {
+    public int[] getConcatenation(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[2 * n];
+
+        for (int i = 0; i < n; i++) {
+            ans[i] = nums[i];
+            ans[i + n] = nums[i];
+        }
+
+        return ans;
+    }
+}
+
+
+
+3. Running Sum of 1d Array (LeetCode 1480)
+
+class Solution {
+    public int[] runningSum(int[] nums) {
+
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] += nums[i - 1];
+        }
+
+        return nums;
+    }
+}
+
+
+
+4. Richest Customer Wealth (LeetCode 1672)
+
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+
+        int max = 0;
+
+        for (int[] customer : accounts) {
+            int sum = 0;
+
+            for (int money : customer) {
+                sum += money;
+            }
+
+            max = Math.max(max, sum);
+        }
+
+        return max;
+    }
+}
+
+
+
+5. Shuffle the Array (LeetCode 1470)
+
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+
+        int[] ans = new int[2 * n];
+        int index = 0;
+
+        for (int i = 0; i < n; i++) {
+            ans[index++] = nums[i];
+            ans[index++] = nums[i + n];
+        }
+
+        return ans;
+    }
+}
+
+
+
+6. Kids With the Greatest Number of Candies (LeetCode 1431)
+
+import java.util.*;
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        List<Boolean> ans = new ArrayList<>();
+
+        int max = 0;
+
+        for (int candy : candies) {
+            max = Math.max(max, candy);
+        }
+
+        for (int candy : candies) {
+            ans.add(candy + extraCandies >= max);
+        }
+
+        return ans;
+    }
+}
+
+
+7. Number of Good Pairs (LeetCode 1512)
+
+class Solution {
+    public int numIdenticalPairs(int[] nums) {
+
+        int count = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+
+
+8. How Many Numbers Are Smaller Than the Current Number (LeetCode 1365)
+
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+
+        int[] ans = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int count = 0;
+
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] < nums[i]) {
+                    count++;
+                }
+            }
+
+            ans[i] = count;
+        }
+
+        return ans;
+    }
+}
+
+
+
+9. Create Target Array in the Given Order (LeetCode 1389)
+
+import java.util.*;
+
+class Solution {
+    public int[] createTargetArray(int[] nums, int[] index) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            list.add(index[i], nums[i]);
+        }
+
+        int[] ans = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+            ans[i] = list.get(i);
+        }
+
+        return ans;
+    }
+}
+
+
+
+10. Check if the Sentence Is Pangram (LeetCode 1832)
+
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+
+        boolean[] seen = new boolean[26];
+
+        for (char ch : sentence.toCharArray()) {
+            seen[ch - 'a'] = true;
+        }
+
+        for (boolean b : seen) {
+            if (!b) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+
+
+11. Count Items Matching a Rule (LeetCode 1773)
+
+import java.util.*;
+
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+
+        int index = 0;
+
+        if (ruleKey.equals("color")) {
+            index = 1;
+        } else if (ruleKey.equals("name")) {
+            index = 2;
+        }
+
+        int count = 0;
+
+        for (List<String> item : items) {
+            if (item.get(index).equals(ruleValue)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
+
+
+
+12. Find the Highest Altitude (LeetCode 1732)
+
+class Solution {
+    public int largestAltitude(int[] gain) {
+
+        int altitude = 0;
+        int max = 0;
+
+        for (int g : gain) {
+            altitude += g;
+            max = Math.max(max, altitude);
+        }
+
+        return max;
+    }
+}
+
+
+
+13. Flipping an Image (LeetCode 832)
+
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+
+        for (int[] row : image) {
+
+            int left = 0;
+            int right = row.length - 1;
+
+            while (left <= right) {
+
+                int temp = row[left] ^ 1;
+                row[left] = row[right] ^ 1;
+                row[right] = temp;
+
+                left++;
+                right--;
+            }
+        }
+
+        return image;
+    }
+}
+
+
+
+14. Cells with Odd Values in a Matrix (LeetCode 1252)
+
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+
+        int[][] matrix = new int[m][n];
+
+        for (int[] index : indices) {
+
+            int row = index[0];
+            int col = index[1];
+
+            for (int i = 0; i < n; i++) {
+                matrix[row][i]++;
+            }
+
+            for (int i = 0; i < m; i++) {
+                matrix[i][col]++;
+            }
+        }
+
+        int count = 0;
+
+        for (int[] row : matrix) {
+            for (int value : row) {
+                if (value % 2 != 0) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+MEDIUM
+
+
+1. Spiral Matrix (LeetCode 54)
+
+import java.util.*;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+
+        List<Integer> result = new ArrayList<>();
+
+        int top = 0;
+        int bottom = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+
+        while (top <= bottom && left <= right) {
+
+            for (int i = left; i <= right; i++)
+                result.add(matrix[top][i]);
+            top++;
+
+            for (int i = top; i <= bottom; i++)
+                result.add(matrix[i][right]);
+            right--;
+
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--)
+                    result.add(matrix[bottom][i]);
+                bottom--;
+            }
+
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--)
+                    result.add(matrix[i][left]);
+                left++;
+            }
+        }
+
+        return result;
+    }
+}
+
+
+
+2. Spiral Matrix II (LeetCode 59)
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+
+        int[][] matrix = new int[n][n];
+
+        int top = 0, bottom = n - 1;
+        int left = 0, right = n - 1;
+
+        int num = 1;
+
+        while (top <= bottom && left <= right) {
+
+            for (int i = left; i <= right; i++)
+                matrix[top][i] = num++;
+            top++;
+
+            for (int i = top; i <= bottom; i++)
+                matrix[i][right] = num++;
+            right--;
+
+            for (int i = right; i >= left; i--)
+                matrix[bottom][i] = num++;
+            bottom--;
+
+            for (int i = bottom; i >= top; i--)
+                matrix[i][left] = num++;
+            left++;
+        }
+
+        return matrix;
+    }
+}
+
+
+
+3. Spiral Matrix III (LeetCode 885)
+
+class Solution {
+    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+
+        int[][] ans = new int[rows * cols][2];
+        int index = 0;
+
+        int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
+
+        ans[index++] = new int[]{rStart, cStart};
+
+        int step = 1;
+
+        while (index < rows * cols) {
+
+            for (int d = 0; d < 4; d++) {
+
+                int move = (d < 2) ? step : step + 1;
+
+                for (int i = 0; i < move; i++) {
+                    rStart += dirs[d][0];
+                    cStart += dirs[d][1];
+
+                    if (rStart >= 0 && rStart < rows &&
+                        cStart >= 0 && cStart < cols) {
+
+                        ans[index++] = new int[]{rStart, cStart};
+
+                        if (index == rows * cols)
+                            return ans;
+                    }
+                }
+            }
+
+            step += 2;
+        }
+
+        return ans;
+    }
+}
+
+
+
+4. Set Matrix Zeroes (LeetCode 73)
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        boolean firstRow = false;
+        boolean firstCol = false;
+
+        for (int i = 0; i < m; i++)
+            if (matrix[i][0] == 0)
+                firstCol = true;
+
+        for (int j = 0; j < n; j++)
+            if (matrix[0][j] == 0)
+                firstRow = true;
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                    matrix[i][j] = 0;
+            }
+        }
+
+        if (firstRow) {
+            for (int j = 0; j < n; j++)
+                matrix[0][j] = 0;
+        }
+
+        if (firstCol) {
+            for (int i = 0; i < m; i++)
+                matrix[i][0] = 0;
+        }
+    }
+}
+
+
+
+5. Product of Array Except Self (LeetCode 238)
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+
+        int n = nums.length;
+        int[] ans = new int[n];
+
+        ans[0] = 1;
+
+        for (int i = 1; i < n; i++) {
+            ans[i] = ans[i - 1] * nums[i - 1];
+        }
+
+        int right = 1;
+
+        for (int i = n - 1; i >= 0; i--) {
+            ans[i] *= right;
+            right *= nums[i];
+        }
+
+        return ans;
+    }
+}
+
+
+HARD
+
+
+
+1. Max Value of Equation (LeetCode 1499)
+
+import java.util.*;
+
+class Solution {
+    public int findMaxValueOfEquation(int[][] points, int k) {
+
+        Deque<int[]> deque = new ArrayDeque<>();
+        int maxValue = Integer.MIN_VALUE;
+
+        for (int[] point : points) {
+            int x = point[0];
+            int y = point[1];
+
+            while (!deque.isEmpty() && x - deque.peekFirst()[0] > k) {
+                deque.pollFirst();
+            }
+
+            if (!deque.isEmpty()) {
+                maxValue = Math.max(maxValue,
+                        x + y + deque.peekFirst()[1]);
+            }
+
+            int value = y - x;
+
+            while (!deque.isEmpty() && deque.peekLast()[1] <= value) {
+                deque.pollLast();
+            }
+
+            deque.offerLast(new int[]{x, value});
+        }
+
+        return maxValue;
+    }
+}
+
+
+
+
+2. First Missing Positive (LeetCode 41)
+
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+
+            while (nums[i] > 0 &&
+                   nums[i] <= n &&
+                   nums[nums[i] - 1] != nums[i]) {
+
+                int temp = nums[i];
+                nums[i] = nums[temp - 1];
+                nums[temp - 1] = temp;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+
+        return n + 1;
+    }
+}

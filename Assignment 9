@@ -1,0 +1,360 @@
+1. Square Star Pattern
+
+public class Pattern1 {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= 5; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+2. Increasing Star Triangle
+
+public class Pattern2 {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+3. Decreasing Star Triangle
+
+public class Pattern3 {
+    public static void main(String[] args) {
+        for (int i = 5; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+4. Number Triangle
+
+public class Pattern4 {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+5. Diamond Left Star Pattern
+
+public class Pattern5 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+
+        for (int i = 4; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
+6. Right Aligned Increasing Triangle
+
+public class Pattern6 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--) {
+                System.out.print(" ");
+            }
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+7. Right Aligned Decreasing Triangle
+
+public class Pattern7 {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 5; j > i; j--) {
+                System.out.print(" ");
+            }
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+8. Pyramid Pattern
+
+public class Pattern8 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--) {
+                System.out.print(" ");
+            }
+
+            for (int j = 1; j <= (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+9. Inverted Pyramid Pattern
+
+public class Pattern9 {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 5; j > i; j--) {
+                System.out.print(" ");
+            }
+
+            for (int j = 1; j <= (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+10. Hollow Pyramid Pattern
+
+public class Pattern10 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--) {
+                System.out.print(" ");
+            }
+
+            for (int j = 1; j <= 2 * i - 1; j++) {
+
+                if (j == 1 || j == 2 * i - 1)
+                    System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+11. Inverted Half Pyramid
+
+public class Pattern11 {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+12. Diamond Pattern
+
+public class Pattern12 {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= i; j++)
+                System.out.print("* ");
+
+            System.out.println();
+        }
+
+        for (int i = 2; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= i; j++)
+                System.out.print("* ");
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+13. Hollow Pyramid Pattern
+
+public class Pattern13 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= 2 * i - 1; j++) {
+
+                if (i == 5 || j == 1 || j == 2 * i - 1)
+                    System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+14. Inverted Hollow Pyramid
+
+public class Pattern14 {
+    public static void main(String[] args) {
+
+        for (int i = 5; i >= 1; i--) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= 2 * i - 1; j++) {
+
+                if (i == 5 || j == 1 || j == 2 * i - 1)
+                    System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+15. Hollow Diamond Pattern
+
+public class Pattern15 {
+    public static void main(String[] args) {
+
+        for (int i = 1; i <= 5; i++) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= 2 * i - 1; j++) {
+
+                if (j == 1 || j == 2 * i - 1)
+                    System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+
+            System.out.println();
+        }
+
+
+        for (int i = 4; i >= 1; i--) {
+
+            for (int j = 5; j > i; j--)
+                System.out.print(" ");
+
+            for (int j = 1; j <= 2 * i - 1; j++) {
+
+                if (j == 1 || j == 2 * i - 1)
+                    System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+
+            System.out.println();
+        }
+    }
+}
+
+
+
+16. Pascal's Triangle
+
+public class Pattern16 {
+    public static void main(String[] args) {
+
+        int n = 5;
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = n; j > i; j--)
+                System.out.print(" ");
+
+            int num = 1;
+
+            for (int j = 0; j <= i; j++) {
+
+                System.out.print(num + "   ");
+
+                num = num * (i - j) / (j + 1);
+            }
+
+            System.out.println();
+        }
+    }
+}

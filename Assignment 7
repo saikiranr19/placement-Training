@@ -1,0 +1,562 @@
+EASY
+
+
+1. Merge Sorted Array (LeetCode 88)
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (j >= 0) {
+
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } 
+            else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+
+            k--;
+        }
+    }
+}
+
+
+
+2. Majority Element (LeetCode 169)
+
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
+
+            if (count == 0) {
+                candidate = num;
+            }
+
+            if (num == candidate)
+                count++;
+            else
+                count--;
+        }
+
+        return candidate;
+    }
+}
+
+
+
+3. Contains Duplicate (LeetCode 217)
+
+import java.util.*;
+
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+
+            if (set.contains(num))
+                return true;
+
+            set.add(num);
+        }
+
+        return false;
+    }
+}
+
+
+4. Missing Number (LeetCode 268)
+
+class Solution {
+    public int missingNumber(int[] nums) {
+
+        int n = nums.length;
+        int sum = n * (n + 1) / 2;
+
+        for (int num : nums) {
+            sum -= num;
+        }
+
+        return sum;
+    }
+}
+
+
+5. Intersection of Two Arrays (LeetCode 349)
+
+import java.util.*;
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+
+        HashSet<Integer> set1 = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        HashSet<Integer> result = new HashSet<>();
+
+        for (int num : nums2) {
+
+            if (set1.contains(num)) {
+                result.add(num);
+            }
+        }
+
+        int[] ans = new int[result.size()];
+
+        int index = 0;
+
+        for (int num : result) {
+            ans[index++] = num;
+        }
+
+        return ans;
+    }
+}
+
+
+6. Intersection of Two Arrays II (LeetCode 350)
+
+import java.util.*;
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int num : nums1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int num : nums2) {
+
+            if (map.containsKey(num) && map.get(num) > 0) {
+
+                list.add(num);
+                map.put(num, map.get(num) - 1);
+            }
+        }
+
+        int[] ans = new int[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            ans[i] = list.get(i);
+        }
+
+        return ans;
+    }
+}
+
+
+
+7. Third Maximum Number (LeetCode 414)
+
+class Solution {
+    public int thirdMax(int[] nums) {
+
+        Long first = null;
+        Long second = null;
+        Long third = null;
+
+        for (int num : nums) {
+
+            long n = num;
+
+            if ((first != null && first == n) ||
+                (second != null && second == n) ||
+                (third != null && third == n))
+                continue;
+
+            if (first == null || n > first) {
+
+                third = second;
+                second = first;
+                first = n;
+
+            } else if (second == null || n > second) {
+
+                third = second;
+                second = n;
+
+            } else if (third == null || n > third) {
+
+                third = n;
+            }
+        }
+
+        return third == null ? first.intValue() : third.intValue();
+    }
+}
+
+
+
+8. Assign Cookies (LeetCode 455)
+
+import java.util.*;
+
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int child = 0;
+        int cookie = 0;
+
+        while (child < g.length && cookie < s.length) {
+
+            if (s[cookie] >= g[child]) {
+                child++;
+            }
+
+            cookie++;
+        }
+
+        return child;
+    }
+}
+
+
+9. Array Partition I (LeetCode 561)
+
+import java.util.*;
+
+class Solution {
+    public int arrayPairSum(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int sum = 0;
+
+        for (int i = 0; i < nums.length; i += 2) {
+
+            sum += nums[i];
+        }
+
+        return sum;
+    }
+}
+
+10. Maximum Product of Three Numbers (LeetCode 628)
+
+import java.util.*;
+
+class Solution {
+    public int maximumProduct(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int n = nums.length;
+
+        return Math.max(
+            nums[n-1] * nums[n-2] * nums[n-3],
+            nums[0] * nums[1] * nums[n-1]
+        );
+    }
+}
+
+
+MEDIUM
+
+
+1. 3Sum (LeetCode 15)
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    while (left < right && nums[left] == nums[left + 1])
+                        left++;
+
+                    while (left < right && nums[right] == nums[right - 1])
+                        right--;
+
+                    left++;
+                    right--;
+
+                } else if (sum < 0) {
+
+                    left++;
+
+                } else {
+
+                    right--;
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+
+
+2. 3Sum Closest (LeetCode 16)
+
+import java.util.*;
+
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+
+        Arrays.sort(nums);
+
+        int closest = nums[0] + nums[1] + nums[2];
+
+        for (int i = 0; i < nums.length - 2; i++) {
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (Math.abs(target - sum) < Math.abs(target - closest)) {
+                    closest = sum;
+                }
+
+                if (sum < target)
+                    left++;
+
+                else if (sum > target)
+                    right--;
+
+                else
+                    return sum;
+            }
+        }
+
+        return closest;
+    }
+}
+
+
+
+3. 4Sum (LeetCode 18)
+
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);
+
+        int n = nums.length;
+
+        for (int i = 0; i < n - 3; i++) {
+
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            for (int j = i + 1; j < n - 2; j++) {
+
+                if (j > i + 1 && nums[j] == nums[j - 1])
+                    continue;
+
+                int left = j + 1;
+                int right = n - 1;
+
+                while (left < right) {
+
+                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
+
+                    if (sum == target) {
+
+                        result.add(Arrays.asList(
+                                nums[i], nums[j], nums[left], nums[right]
+                        ));
+
+                        while (left < right && nums[left] == nums[left + 1])
+                            left++;
+
+                        while (left < right && nums[right] == nums[right - 1])
+                            right--;
+
+                        left++;
+                        right--;
+
+                    } else if (sum < target) {
+
+                        left++;
+
+                    } else {
+
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+
+4. Group Anagrams (LeetCode 49)
+
+import java.util.*;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        for (String s : strs) {
+
+            char[] chars = s.toCharArray();
+
+            Arrays.sort(chars);
+
+            String key = new String(chars);
+
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+
+            map.get(key).add(s);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+}
+
+
+
+5. Merge Intervals (LeetCode 56)
+
+import java.util.*;
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+        ArrayList<int[]> result = new ArrayList<>();
+
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+
+        for (int i = 1; i < intervals.length; i++) {
+
+            if (intervals[i][0] <= end) {
+
+                end = Math.max(end, intervals[i][1]);
+
+            } else {
+
+                result.add(new int[]{start, end});
+
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
+        }
+
+        result.add(new int[]{start, end});
+
+        return result.toArray(new int[result.size()][]);
+    }
+}
+
+
+6. Sort Colors (LeetCode 75)
+
+class Solution {
+    public void sortColors(int[] nums) {
+
+        int low = 0;
+        int mid = 0;
+        int high = nums.length - 1;
+
+        while (mid <= high) {
+
+            if (nums[mid] == 0) {
+
+                int temp = nums[low];
+                nums[low] = nums[mid];
+                nums[mid] = temp;
+
+                low++;
+                mid++;
+
+            } else if (nums[mid] == 1) {
+
+                mid++;
+
+            } else {
+
+                int temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+
+                high--;
+            }
+        }
+    }
+}
+
+HARD
+First Misssing Positive
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+
+        // Place each number x at index x-1
+        for (int i = 0; i < n; i++) {
+            while (nums[i] > 0 &&
+                   nums[i] <= n &&
+                   nums[nums[i] - 1] != nums[i]) {
+                swap(nums[i], nums[nums[i] - 1]);
+            }
+        }
+
+        // Find the first position with the wrong value
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+
+        // If all positions are correct
+        return n + 1;
+    }
+};

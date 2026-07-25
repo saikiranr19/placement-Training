@@ -1,0 +1,733 @@
+1. Defanging an IP Address
+
+class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        return address.replace(".", "[.]")
+
+
+2. Shuffle String
+
+class Solution:
+    def restoreString(self, s: str, indices: list[int]) -> str:
+        result = [""] * len(s)
+
+        for i in range(len(s)):
+            result[indices[i]] = s[i]
+
+        return "".join(result)
+
+
+
+3. Goal Parser Interpretation
+
+
+class Solution:
+    def interpret(self, command: str) -> str:
+        return command.replace("()", "o").replace("(al)", "al")
+
+
+4. Count Items Matching a Rule
+
+class Solution:
+    def countMatches(self, items, ruleKey, ruleValue):
+        index = {
+            "type": 0,
+            "color": 1,
+            "name": 2
+        }
+
+        count = 0
+
+        for item in items:
+            if item[index[ruleKey]] == ruleValue:
+                count += 1
+
+        return count
+
+
+5. Sorting the Sentence
+
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        words = s.split()
+        result = [""] * len(words)
+
+        for word in words:
+            index = int(word[-1])
+            result[index - 1] = word[:-1]
+
+        return " ".join(result)
+
+
+
+6. Check if Two Strings Are Equivalent
+
+class Solution:
+    def arrayStringsAreEqual(self, word1, word2):
+        return "".join(word1) == "".join(word2)
+
+
+
+7. To Lower Case
+
+class Solution:
+    def toLowerCase(self, s: str) -> str:
+        return s.lower()
+
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        vowels = "aeiouAEIOU"
+
+        mid = len(s) // 2
+
+        left = 0
+        right = 0
+
+        for i in range(mid):
+            if s[i] in vowels:
+                left += 1
+
+            if s[i + mid] in vowels:
+                right += 1
+
+        return left == right
+
+
+
+9. Decrypt String from Alphabet to Integer Mapping
+
+class Solution:
+    def freqAlphabets(self, s: str) -> str:
+        result = []
+        i = len(s) - 1
+
+        while i >= 0:
+            if s[i] == '#':
+                num = int(s[i-2:i])
+                i -= 3
+            else:
+                num = int(s[i])
+                i -= 1
+
+            result.append(chr(96 + num))
+
+        return "".join(result[::-1])
+
+
+
+10. Number of Strings That Appear as Substrings in Word
+
+class Solution:
+    def numOfStrings(self, patterns, word):
+        count = 0
+
+        for pattern in patterns:
+            if pattern in word:
+                count += 1
+
+        return count
+
+
+
+11. Robot Return to Origin
+
+class Solution:
+    def judgeCircle(self, moves: str) -> bool:
+        x = 0
+        y = 0
+
+        for move in moves:
+            if move == "U":
+                y += 1
+            elif move == "D":
+                y -= 1
+            elif move == "L":
+                x -= 1
+            else:
+                x += 1
+
+        return x == 0 and y == 0
+
+
+
+12. Reverse Words in a String III
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        words = s.split()
+
+        for i in range(len(words)):
+            words[i] = words[i][::-1]
+
+        return " ".join(words)
+
+
+
+13. Excel Sheet Column Title:
+
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        result = ""
+
+        while columnNumber > 0:
+            columnNumber -= 1
+            result = chr(65 + columnNumber % 26) + result
+            columnNumber //= 26
+
+        return result
+
+MEDIUM
+
+
+1. Jump Game VII
+
+class Solution {
+    public boolean canReach(String s, int minJump, int maxJump) {
+        int n = s.length();
+        boolean[] dp = new boolean[n];
+        dp[0] = true;
+
+        int count = 0;
+
+        for (int i = 1; i < n; i++) {
+
+            if (i - minJump >= 0 && dp[i - minJump]) {
+                count++;
+            }
+
+            if (i - maxJump - 1 >= 0 && dp[i - maxJump - 1]) {
+                count--;
+            }
+
+            dp[i] = count > 0 && s.charAt(i) == '0';
+        }
+
+        return dp[n - 1];
+    }
+}
+
+
+2. Split Two Strings to Make Palindrome
+
+class Solution {
+    public boolean checkPalindromeFormation(String a, String b) {
+        return check(a, b) || check(b, a);
+    }
+
+    private boolean check(String a, String b) {
+        int left = 0;
+        int right = a.length() - 1;
+
+        while (left < right && a.charAt(left) == b.charAt(right)) {
+            left++;
+            right--;
+        }
+
+        return isPalindrome(a, left, right) ||
+               isPalindrome(b, left, right);
+    }
+
+    private boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+
+
+3. Number of Ways to Split a String
+
+class Solution {
+    public int numWays(String s) {
+
+        long mod = 1000000007;
+        int ones = 0;
+
+        for (char c : s.toCharArray()) {
+            if (c == '1') {
+                ones++;
+            }
+        }
+
+        if (ones % 3 != 0) {
+            return 0;
+        }
+
+        if (ones == 0) {
+            long n = s.length() - 1;
+            return (int)((n * (n - 1) / 2) % mod);
+        }
+
+        int part = ones / 3;
+        int count = 0;
+
+        long first = 0;
+        long second = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') {
+                count++;
+
+                if (count == part) {
+                    first = i;
+                }
+
+                if (count == part * 2) {
+                    second = i;
+                }
+            }
+        }
+
+        long firstWays = 0;
+        long secondWays = 0;
+
+        while (first + 1 < s.length() &&
+               s.charAt((int)first + 1) == '0') {
+            firstWays++;
+            first++;
+        }
+
+        while (second + 1 < s.length() &&
+               s.charAt((int)second + 1) == '0') {
+            secondWays++;
+            second++;
+        }
+
+        return (int)(((firstWays + 1) * (secondWays + 1)) % mod);
+    }
+}
+
+
+
+4. Sentence Similarity III
+
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+
+        String[] a = sentence1.split(" ");
+        String[] b = sentence2.split(" ");
+
+        int i = 0;
+
+        while (i < a.length && i < b.length &&
+               a[i].equals(b[i])) {
+            i++;
+        }
+
+        int j = 0;
+
+        while (j < a.length - i &&
+               j < b.length - i &&
+               a[a.length - 1 - j].equals(b[b.length - 1 - j])) {
+            j++;
+        }
+
+        return i + j == Math.min(a.length, b.length);
+    }
+}
+
+
+
+5. Repeated String Match
+
+class Solution {
+    public int repeatedStringMatch(String a, String b) {
+
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+
+        while (sb.length() < b.length()) {
+            sb.append(a);
+            count++;
+        }
+
+        if (sb.toString().contains(b)) {
+            return count;
+        }
+
+        sb.append(a);
+
+        if (sb.toString().contains(b)) {
+            return count + 1;
+        }
+
+        return -1;
+    }
+}
+
+
+
+6. Next Greater Element III
+
+import java.util.*;
+
+class Solution {
+    public int nextGreaterElement(int n) {
+
+        char[] nums = String.valueOf(n).toCharArray();
+
+        int i = nums.length - 2;
+
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+        if (i < 0) {
+            return -1;
+        }
+
+        int j = nums.length - 1;
+
+        while (nums[j] <= nums[i]) {
+            j--;
+        }
+
+        char temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+
+        Arrays.sort(nums, i + 1, nums.length);
+
+        long result = Long.parseLong(new String(nums));
+
+        return result > Integer.MAX_VALUE ? -1 : (int)result;
+    }
+}
+
+
+
+7. Maximum Number of Removable Characters
+
+class Solution {
+
+    public int maximumRemovals(String s, String p, int[] removable) {
+
+        int left = 0;
+        int right = removable.length;
+        int answer = 0;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            if (check(s, p, removable, mid)) {
+                answer = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return answer;
+    }
+
+    private boolean check(String s, String p, int[] removable, int k) {
+
+        boolean[] removed = new boolean[s.length()];
+
+        for (int i = 0; i < k; i++) {
+            removed[removable[i]] = true;
+        }
+
+        int j = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (!removed[i] &&
+                j < p.length() &&
+                s.charAt(i) == p.charAt(j)) {
+                j++;
+            }
+        }
+
+        return j == p.length();
+    }
+}
+
+
+HARD
+
+
+
+1. Valid Number
+
+class Solution {
+    public boolean isNumber(String s) {
+
+        boolean digit = false;
+        boolean dot = false;
+        boolean e = false;
+        boolean digitAfterE = true;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char c = s.charAt(i);
+
+            if (Character.isDigit(c)) {
+                digit = true;
+
+                if (e) {
+                    digitAfterE = true;
+                }
+            }
+            else if (c == '.') {
+
+                if (dot || e)
+                    return false;
+
+                dot = true;
+            }
+            else if (c == 'e' || c == 'E') {
+
+                if (e || !digit)
+                    return false;
+
+                e = true;
+                digitAfterE = false;
+            }
+            else if (c == '+' || c == '-') {
+
+                if (i != 0 && s.charAt(i - 1) != 'e' &&
+                    s.charAt(i - 1) != 'E')
+                    return false;
+            }
+            else {
+                return false;
+            }
+        }
+
+        return digit && digitAfterE;
+    }
+}
+
+
+
+2. Regular Expression Matching
+
+class Solution {
+    public boolean isMatch(String s, String p) {
+
+        int m = s.length();
+        int n = p.length();
+
+        boolean[][] dp = new boolean[m + 1][n + 1];
+
+        dp[0][0] = true;
+
+        for (int j = 2; j <= n; j++) {
+            if (p.charAt(j - 1) == '*') {
+                dp[0][j] = dp[0][j - 2];
+            }
+        }
+
+        for (int i = 1; i <= m; i++) {
+
+            for (int j = 1; j <= n; j++) {
+
+                char sc = s.charAt(i - 1);
+                char pc = p.charAt(j - 1);
+
+                if (pc == '.' || pc == sc) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+
+                else if (pc == '*') {
+
+                    dp[i][j] = dp[i][j - 2];
+
+                    char prev = p.charAt(j - 2);
+
+                    if (prev == '.' || prev == sc) {
+                        dp[i][j] |= dp[i - 1][j];
+                    }
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+}
+
+
+
+3. Last Substring in Lexicographical Order
+
+class Solution {
+    public String lastSubstring(String s) {
+
+        int n = s.length();
+
+        int i = 0;
+        int j = 1;
+        int k = 0;
+
+        while (j + k < n) {
+
+            if (s.charAt(i + k) == s.charAt(j + k)) {
+                k++;
+            }
+            else if (s.charAt(i + k) < s.charAt(j + k)) {
+
+                i = Math.max(i + k + 1, j);
+                j = i + 1;
+                k = 0;
+            }
+            else {
+
+                j = j + k + 1;
+                k = 0;
+            }
+        }
+
+        return s.substring(i);
+    }
+}
+
+
+
+4. Basic Calculator
+
+import java.util.*;
+
+class Solution {
+    public int calculate(String s) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        int result = 0;
+        int number = 0;
+        int sign = 1;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char c = s.charAt(i);
+
+            if (Character.isDigit(c)) {
+                number = number * 10 + (c - '0');
+            }
+
+            else if (c == '+') {
+
+                result += sign * number;
+                number = 0;
+                sign = 1;
+            }
+
+            else if (c == '-') {
+
+                result += sign * number;
+                number = 0;
+                sign = -1;
+            }
+
+            else if (c == '(') {
+
+                stack.push(result);
+                stack.push(sign);
+
+                result = 0;
+                sign = 1;
+            }
+
+            else if (c == ')') {
+
+                result += sign * number;
+                number = 0;
+
+                result *= stack.pop();
+                result += stack.pop();
+            }
+        }
+
+        return result + sign * number;
+    }
+}
+
+
+
+5. Minimum Number of Operations to Make String Sorted
+
+import java.util.*;
+
+class Solution {
+    public int makeStringSorted(String s) {
+
+        long mod = 1000000007;
+
+        int n = s.length();
+
+        long[] fact = new long[n + 1];
+        long[] invFact = new long[n + 1];
+
+        fact[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            fact[i] = fact[i - 1] * i % mod;
+        }
+
+        invFact[n] = power(fact[n], mod - 2, mod);
+
+        for (int i = n - 1; i >= 0; i--) {
+            invFact[i] = invFact[i + 1] * (i + 1) % mod;
+        }
+
+
+        int[] count = new int[26];
+
+        for (char c : s.toCharArray()) {
+            count[c - 'a']++;
+        }
+
+        long ans = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            int smaller = 0;
+
+            for (int j = 0; j < s.charAt(i) - 'a'; j++) {
+                smaller += count[j];
+            }
+
+            if (smaller > 0) {
+
+                long ways = fact[n - i - 1];
+
+                for (int j = 0; j < 26; j++) {
+                    ways = ways * invFact[count[j] - 
+                            (j == s.charAt(i) - 'a' ? 1 : 0)] % mod;
+                }
+
+                ans = (ans + ways * smaller) % mod;
+            }
+
+            count[s.charAt(i) - 'a']--;
+        }
+
+        return (int) ans;
+    }
+
+
+    private long power(long a, long b, long mod) {
+
+        long result = 1;
+
+        while (b > 0) {
+
+            if ((b & 1) == 1)
+                result = result * a % mod;
+
+            a = a * a % mod;
+            b >>= 1;
+        }
+
+        return result;
+    }
+}
